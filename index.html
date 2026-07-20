@@ -688,7 +688,10 @@ const LICENSES = {
     blurb:"What Elastic itself switched to. Lets people use, modify, and redistribute the code, but blocks offering it as a competing hosted/managed service. Common among infrastructure and dev-tooling companies protecting against cloud providers repackaging their product." },
   sspl: { name:"Server Side Public License (SSPL)", tags:["Source-available","Not in GitHub's picker","Strongest SaaS protection"], native:false,
     url:"https://www.mongodb.com/licensing/server-side-public-license",
-    blurb:"MongoDB's license — the strongest SaaS protection on this list. If someone offers your software as a hosted service, they'd have to open-source nearly everything needed to run that service, not just their changes to your code. Cloud providers generally avoid depending on SSPL software, which is exactly the point." }
+    blurb:"MongoDB's license — the strongest SaaS protection on this list. If someone offers your software as a hosted service, they'd have to open-source nearly everything needed to run that service, not just their changes to your code. Cloud providers generally avoid depending on SSPL software, which is exactly the point." },
+  agplCommercial: { name:"Dual License — AGPLv3 + Commercial", tags:["Source-available","Not in GitHub's picker","Dual licensing","Open-core friendly"], native:false,
+    url:"https://choosealicense.com/licenses/agpl-3.0/",
+    blurb:"Not one license but a business model: release the project under AGPLv3 for the community — free to use, modify, and self-host, but any modified or hosted version has to be open-sourced too. Then, because you hold the copyright, you're the only one who can also offer a separate commercial license — sold to companies that want to embed, modify, or distribute the software without AGPL's copyleft and source-disclosure obligations. This is how MongoDB, MySQL, and many open-core startups monetize: community users stay on AGPL for free, businesses that can't live with AGPL pay you instead." }
 };
 
 // Full official text embedded locally for the licenses short and standardized enough to
@@ -1026,7 +1029,7 @@ const NEEDS_NAME = new Set(['mit','bsd2','bsd3','apache2','proprietary']);
 // bonus, non-GitHub-native options mentioned when relevant
 const SOURCE_AVAILABLE_NOTE = {
   trigger: false,
-  html: `<strong>Worth knowing:</strong> based on your answers, you want adoption <em>and</em> real protection from commercial resale or hosted competitors — no license in GitHub's built-in picker fully does both at once. Source-available licenses like the <strong>Business Source License (BSL)</strong> or <strong>PolyForm Noncommercial / Shield</strong> are built for exactly this gap: free to use, restricted commercial or competing use, sometimes converting to a fully open license after a few years. They're not OSI-approved "open source," so a few companies avoid depending on them — but they're the more accurate tool if protection matters more than open-source purity. You'd add these as a custom LICENSE file rather than picking them from GitHub's list.`
+  html: `<strong>Worth knowing:</strong> based on your answers, you want adoption <em>and</em> real protection from commercial resale or hosted competitors — no single license in GitHub's built-in picker fully does both at once. Source-available licenses like the <strong>Business Source License (BSL)</strong> or <strong>PolyForm Noncommercial / Shield</strong> are built for exactly this gap: free to use, restricted commercial or competing use, sometimes converting to a fully open license after a few years. Another common route is <strong>dual licensing</strong> — release under <strong>AGPLv3</strong> for the community (free, but share-alike and SaaS use both require releasing source), and separately sell companies that don't want those obligations a <strong>commercial license</strong>, which you're free to do since you hold the copyright. None of these are OSI-approved "open source" in the strict sense (dual-AGPL is the closest, since the community copy is genuinely open), so a few companies avoid depending on them — but they're the more accurate tool if protection or monetization matters more than open-source purity. You'd add these as a custom LICENSE file rather than picking them from GitHub's list.`
 };
 
 /* ---------------------------------------------------------
@@ -1039,7 +1042,8 @@ const QUESTIONS = [
       { label:"Get as many people using it as possible", points:{mit:3,bsd2:3,bsd3:2,apache2:2,boost:1,cc0:1,unlicense:1} },
       { label:"Let people use and improve it, but keep improvements public", points:{gplv3:3,gplv2:2,mpl2:2,epl2:2,lgpl21:1,agpl3:1} },
       { label:"Let people use it personally or for learning, but not resell it", points:{proprietary:3,agpl3:1,bsl:2,polyformShield:2,elasticv2:1}, sourceAvail:true },
-      { label:"Protect it as a commercial product — most rights reserved", points:{proprietary:3,agpl3:1,bsl:2,elasticv2:1,sspl:1}, sourceAvail:true }
+      { label:"Protect it as a commercial product — most rights reserved", points:{proprietary:3,agpl3:1,bsl:2,elasticv2:1,sspl:1}, sourceAvail:true },
+      { label:"Give it away free under AGPL for the community, but sell companies a separate commercial license to skip AGPL's obligations", points:{agplCommercial:3,agpl3:2,bsl:1}, sourceAvail:true }
     ]
   },
   {
@@ -1048,7 +1052,8 @@ const QUESTIONS = [
       { label:"Yes, completely fine", points:{mit:2,apache2:2,bsd2:1,bsd3:1,boost:1,cc0:1,unlicense:1} },
       { label:"Yes, but only if they share their changes too", points:{gplv3:2,gplv2:2,mpl2:1,epl2:1} },
       { label:"Yes, but not as a competing hosted/online service", points:{agpl3:3,gplv3:1,sspl:2,elasticv2:2,bsl:1}, sourceAvail:true },
-      { label:"No, not at all", points:{proprietary:3,bsl:1}, sourceAvail:true }
+      { label:"No, not at all", points:{proprietary:3,bsl:1}, sourceAvail:true },
+      { label:"Only if they pay me for a separate commercial license", points:{agplCommercial:3,bsl:1}, sourceAvail:true }
     ]
   },
   {
@@ -1134,7 +1139,7 @@ function renderQuestion(){
   document.getElementById('qText').textContent = q.text;
   const opts = document.getElementById('qOptions');
   opts.innerHTML = '';
-  const letters = ['A','B','C','D'];
+  const letters = ['A','B','C','D','E'];
   q.options.forEach((opt, idx)=>{
     const btn = document.createElement('button');
     btn.className = 'option';
@@ -1615,6 +1620,7 @@ const OFFLIST_ROWS = [
   ["Fair Source License","Yes","Limited commercial use, converts to fully open eventually","Middle ground between proprietary and open source"],
   ["Prosperity License","Yes","Evaluation only — no commercial deployment without a separate license","Sharing research or eval-only software"],
   ["Commons Clause","Add-on, not standalone","Blocks selling the software — layered onto MIT/Apache etc.","Adding a 'can't resell this' clause to a permissive license"],
+  ["Dual License (AGPL + Commercial)","Not a single license — a model","Community gets AGPLv3 (share-alike + SaaS obligations); companies instead buy a commercial license from you to skip those obligations","Open-core startups monetizing companies that can't use AGPL"],
   ["Blue Oak Model License","No — OSI-adjacent, permissive","None — a modern, plainer rewrite of MIT-style terms","Devs who want cleaner legal language than MIT"],
   ["Open Software License (OSL 3.0)","No — OSI-approved, but uncommon","GPL-like copyleft with explicit patent terms","Rarely used today"],
   ["Academic Free License (AFL 3.0)","No — OSI-approved, but uncommon","Enterprise-oriented permissive terms","Rarely used today"],
