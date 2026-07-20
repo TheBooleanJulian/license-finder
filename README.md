@@ -39,8 +39,9 @@ open index.html
 ## Status / Roadmap
 
 - [x] Initial single-file tool working
+- [x] Add copy-to-clipboard for license text
 - [ ] Add license comparison view
-- [ ] Add copy-to-clipboard for license text
+
 
 ## Changelog
 
