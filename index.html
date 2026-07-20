@@ -1026,6 +1026,18 @@ limitations under the License.`
 // Only these actually require the name field before generating text.
 const NEEDS_NAME = new Set(['mit','bsd2','bsd3','apache2','proprietary']);
 
+// Every license this tool can recommend has a ready-made template folder in the
+// repo's /templates directory — a LICENSE file (with [year]/[fullname] placeholders
+// where applicable), and for the dual-license option, the full commercial-track paperwork.
+const TEMPLATE_FOLDERS = {
+  mit:'mit', apache2:'apache2', bsd2:'bsd2', bsd3:'bsd3', boost:'boost',
+  gplv3:'gplv3', gplv2:'gplv2', lgpl21:'lgpl21', agpl3:'agpl3', mpl2:'mpl2', epl2:'epl2',
+  cc0:'cc0', unlicense:'unlicense', proprietary:'proprietary',
+  bsl:'bsl', polyformShield:'polyform-shield', elasticv2:'elastic-v2', sspl:'sspl',
+  agplCommercial:'agpl3-plus-commercial'
+};
+const TEMPLATES_BASE_URL = 'https://github.com/TheBooleanJulian/license-finder/tree/main/templates/';
+
 // bonus, non-GitHub-native options mentioned when relevant
 const SOURCE_AVAILABLE_NOTE = {
   trigger: false,
@@ -1254,7 +1266,14 @@ function renderResults(top3, selectedOptions, wantsTrademarkNote, wantsSourceAva
       : '';
 
     let getBox;
-    if(id === 'proprietary' || lic.fullTextAvailable){
+    if(id === 'agplCommercial'){
+      getBox = `<div class="lic-getbox">
+        <p style="font-size:12.5px;color:var(--muted);line-height:1.5;margin:0 0 12px;">Dual licensing isn't one file — it's two tracks: a free AGPLv3 license for the community, plus a separate paid commercial license. The full ready-made paperwork for both — LICENSE, NOTICE, commercial license notice, agreement template, CLA, contributing guide, and trademarks — is in this repo's template folder.</p>
+        <div class="lic-actions">
+          <a class="icon-btn" style="text-decoration:none;" href="https://github.com/TheBooleanJulian/license-finder/tree/main/templates/agpl3-plus-commercial" target="_blank" rel="noopener">Get commercial-track templates ↗</a>
+        </div>
+      </div>`;
+    } else if(id === 'proprietary' || lic.fullTextAvailable){
       getBox = `<div class="lic-getbox">
         <div class="lic-namerow">
           <label for="name-${id}">Copyright holder</label>
@@ -1277,6 +1296,10 @@ function renderResults(top3, selectedOptions, wantsTrademarkNote, wantsSourceAva
            </div>
          </div>`;
     }
+    const templateFolder = TEMPLATE_FOLDERS[id];
+    const templateLink = templateFolder
+      ? `<a class="icon-btn" style="text-decoration:none;" href="${TEMPLATES_BASE_URL}${templateFolder}" target="_blank" rel="noopener">Get the template file(s) ↗</a>`
+      : '';
     card.innerHTML = `
       <span class="rank-badge mono">${rankLabels[i]}</span>
       ${offListBadge}
@@ -1284,7 +1307,10 @@ function renderResults(top3, selectedOptions, wantsTrademarkNote, wantsSourceAva
       <div class="lic-tags">${lic.tags.map(t=>`<span class="lic-tag mono">${t}</span>`).join('')}</div>
       <p class="lic-why">${lic.blurb}</p>
       ${miniRefRowHtml(id)}
-      <a class="lic-link mono" href="${lic.url}" target="_blank" rel="noopener">read about this license →</a>
+      <div class="lic-actions" style="margin-top:10px;">
+        <a class="icon-btn" style="text-decoration:none;" href="${lic.url}" target="_blank" rel="noopener">Read about this license ↗</a>
+        ${templateLink}
+      </div>
       ${getBox}
     `;
     list.appendChild(card);
