@@ -5,7 +5,7 @@
 **Instantly find the right open-source license — for developers who don't want to read walls of legal text.**
 
 ![HTML](https://img.shields.io/badge/-HTML-E34F26?logo=html5&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-00D4C8.svg)
+![License](https://img.shields.io/badge/license-AGPLv3%20%2B%20Commercial-00D4C8.svg)
 
 </div>
 
@@ -48,7 +48,13 @@ open index.html
 
 ## License
 
-MIT
+This project is dual licensed.
+
+**Community Edition** — [GNU Affero General Public License v3 (AGPLv3)](LICENSE). Free to use, modify, and self-host. If you distribute a modified version, or run it as a network service, you must make the corresponding source available.
+
+**Commercial License** — for organizations that want to embed, modify, or distribute this software without AGPLv3's obligations. See [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) and the [agreement template](COMMERCIAL-LICENSE-AGREEMENT-TEMPLATE.md).
+
+Contributing? See [CONTRIBUTING.md](CONTRIBUTING.md) and [CLA.md](CLA.md). Project name/branding usage is covered in [TRADEMARKS.md](TRADEMARKS.md).
 
 ---
 
