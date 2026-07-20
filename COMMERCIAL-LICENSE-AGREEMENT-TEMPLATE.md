@@ -2,7 +2,7 @@
 
 This is a fill-in-the-blanks starting point for the agreement sent to a company that purchases a commercial license under [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md). It is only provided to paying licensees — it is not itself a license grant, and downloading or copying this file does not grant any rights to the software.
 
-Replace every `[bracketed]` field before sending. Consider having a lawyer review the final wording before using it for a real transaction.
+Replace every `[bracketed]` field — including `[Licensor Name]`, `[Software Name]`, and `[repository URL]` — before sending. Consider having a lawyer review the final wording before using it for a real transaction.
 
 ---
 
@@ -12,12 +12,12 @@ COMMERCIAL SOFTWARE LICENSE AGREEMENT
 This Commercial Software License Agreement ("Agreement") is entered into
 as of [Effective Date] ("Effective Date") between:
 
-Licensor:  TheBooleanJulian ("Licensor")
+Licensor:  [Licensor Name] ("Licensor")
 Licensee:  [Company Legal Name], a [jurisdiction] [entity type]
            ("Licensee")
 
-Software:  License Finder (the "Software"), as made available at
-           https://github.com/TheBooleanJulian/license-finder
+Software:  [Software Name] (the "Software"), as made available at
+           [repository URL]
 
 1. BACKGROUND
 
@@ -93,7 +93,7 @@ regard to conflict-of-law principles.
 
 AGREED:
 
-Licensor: TheBooleanJulian              Licensee: [Company Legal Name]
+Licensor: [Licensor Name]               Licensee: [Company Legal Name]
 
 Signature: _____________________        Signature: _____________________
 Name:      _____________________        Name:      _____________________
