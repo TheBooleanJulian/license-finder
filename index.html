@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Which License? — a 60-second license finder</title>
+<link rel="icon" type="image/png" href="assets/license-finder-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -35,6 +36,13 @@
     max-width:720px;
     margin:0 auto;
     padding:56px 24px 80px;
+  }
+  .app-logo{
+    display:block;
+    width:56px;
+    height:56px;
+    border-radius:12px;
+    margin-bottom:18px;
   }
   .eyebrow{
     font-family:'JetBrains Mono', monospace;
@@ -540,6 +548,7 @@
 <body>
 <div class="wrap">
 
+  <img src="assets/license-finder-logo.png" alt="License Finder logo" class="app-logo">
   <div class="eyebrow">License Finder</div>
   <h1 id="pageTitle">Which license fits your project?</h1>
   <p class="sub" id="pageSub">Answer six quick questions — no legal jargon required — and get your top three license picks, ranked and explained. Or hand over a README and let it figure out the answers for you.</p>

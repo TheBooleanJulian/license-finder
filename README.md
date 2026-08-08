@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/license-finder-logo.png" alt="License Finder logo" width="200">
+
 # License Finder
 
 **Instantly find the right open-source license — for developers who don't want to read walls of legal text.**
@@ -43,8 +45,9 @@ open index.html
 - [x] Quiz-driven license finder working
 - [x] AGPL + commercial dual-licensing option
 - [x] Per-license template folders
+- [x] Copy-to-clipboard for license text
 - [ ] License comparison view
-- [ ] Copy-to-clipboard for license text
+
 
 ## Changelog
 
